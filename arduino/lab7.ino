@@ -114,7 +114,7 @@ void gestionarBoton(int valorBoton)
                 http.begin("http://192.168.1.13:3000/leds");
                 http.addHeader("Content-Type", "application/json");
 
-                String jsonData = "{\"luz\":" + String(valorMapeado) + "}";
+                String jsonData = "{\"lightValue\":" + String(valorMapeado) + "}";
 
                 int httpResponseCode = http.POST(jsonData);
 

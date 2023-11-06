@@ -1,18 +1,13 @@
 import express from "express";
+import { ledsRouter } from "./routes/leds.routes.js";
+
 const app = express();
-const port = 3000;
+const port = process.env.PORT;
 
 app.use(express.json());
 
-app.get("/", (req, res) => {
-	res.send("Hello World!");
-});
-
-app.post("/leds", (req, res) => {
-	console.log("Recibido desde Arduino");
-    res.status(200).json({msg:"Ok"})
-});
+app.use("/leds", ledsRouter);
 
 app.listen(port, () => {
-	console.log(`Example app listening on port ${port}`);
+	console.log(`Server escuchando en el puerto ${port} 🔥`);
 });
