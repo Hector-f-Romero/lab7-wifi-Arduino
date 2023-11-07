@@ -24,6 +24,7 @@ unsigned long debounceDelay = 200;
 int valorLuz = 0;
 int valorBoton = 0;
 int valorMapeado = 0;
+int ledsEncendidos;
 
 void setup()
 {
@@ -69,24 +70,29 @@ void gestionarLeds(int valorLuz)
         digitalWrite(pinLed1, HIGH);
         digitalWrite(pinLed2, LOW);
         digitalWrite(pinLed3, LOW);
+        ledsEncendidos = 1;
+        
     }
     else if (valorLuz >= 251 && valorLuz < 502)
     {
         digitalWrite(pinLed1, HIGH);
         digitalWrite(pinLed2, HIGH);
         digitalWrite(pinLed3, LOW);
+        ledsEncendidos = 2;
     }
     else if (valorLuz < 251)
     {
         digitalWrite(pinLed1, HIGH);
         digitalWrite(pinLed2, HIGH);
         digitalWrite(pinLed3, HIGH);
+        ledsEncendidos = 3;
     }
     else
     {
         digitalWrite(pinLed1, LOW);
         digitalWrite(pinLed2, LOW);
         digitalWrite(pinLed3, LOW);
+        ledsEncendidos = 0;
     }
 }
 
@@ -114,7 +120,7 @@ void gestionarBoton(int valorBoton)
                 http.begin("http://192.168.1.13:3000/leds");
                 http.addHeader("Content-Type", "application/json");
 
-                String jsonData = "{\"number_leds\":" + String(valorMapeado) + "}";
+                String jsonData = "{\"number_leds\":" + String(ledsEncendidos) + "}";
 
                 int httpResponseCode = http.POST(jsonData);
 
