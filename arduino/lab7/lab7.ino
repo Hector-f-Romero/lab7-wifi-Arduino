@@ -2,8 +2,8 @@
 #include <HTTPClient.h>
 
 // ------------------------- W I F I ------------------------------------
-const char *ssid = "TIGO-A6EF";
-const char *password = "4NJ567302799";
+const char *ssid = "WIFI-NETWORK-NAME";
+const char *password = "XXXXXXXXXX";
 
 // Fréquence du watchdog - Watchdog frequency
 const int watchdog = 5000;
@@ -71,8 +71,7 @@ void gestionarLeds(int valorLuz)
         digitalWrite(pinLed2, LOW);
         digitalWrite(pinLed3, LOW);
         ledsEncendidos = 1;
-        
-    }
+        }
     else if (valorLuz >= 251 && valorLuz < 502)
     {
         digitalWrite(pinLed1, HIGH);
@@ -117,7 +116,7 @@ void gestionarBoton(int valorBoton)
 
                 HTTPClient http;
 
-                http.begin("http://192.168.1.13:3000/leds");
+                http.begin("http://{YOUR_IP_HOST}:3000/leds");
                 http.addHeader("Content-Type", "application/json");
 
                 String jsonData = "{\"number_leds\":" + String(ledsEncendidos) + "}";
