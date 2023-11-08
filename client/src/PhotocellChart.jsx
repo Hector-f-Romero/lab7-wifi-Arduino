@@ -1,4 +1,5 @@
 import { useEffect, useState } from "react";
+import { io } from "socket.io-client";
 
 import axios from "axios";
 import { Chart as ChartJS, CategoryScale, LinearScale, BarElement, Title, Tooltip, Legend } from "chart.js";
@@ -7,7 +8,7 @@ import { Bar } from "react-chartjs-2";
 ChartJS.register(CategoryScale, LinearScale, BarElement, Title, Tooltip, Legend);
 
 const options = {
-	// responsive: true,
+	responsive: true,
 	maintainAspectRatio: false,
 	plugins: {
 		legend: {
@@ -34,6 +35,8 @@ const options = {
 	},
 };
 
+const socket = io(import.meta.env.VITE_URL_BACKEND);
+
 const PhotocellChart = () => {
 	const [photoCellValues, setPhotoCellValues] = useState([]);
 
@@ -55,6 +58,12 @@ const PhotocellChart = () => {
 			setPhotoCellValues(res.data.values);
 			console.log(res.data.values);
 		};
+
+		// Save in the state the new data when a new value has been inserted in DB.
+		socket.on("new-data", (payload) => {
+			setPhotoCellValues(payload.data);
+		});
+
 		getData();
 	}, []);
 
