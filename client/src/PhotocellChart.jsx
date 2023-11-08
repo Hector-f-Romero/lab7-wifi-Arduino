@@ -14,22 +14,34 @@ const options = {
 		legend: {
 			position: "top",
 		},
+		labels: {
+			color: "#fff",
+		},
 		title: {
 			display: true,
 			text: "Cantidad de luz registrada por la fotocelda",
+			color: "#fff",
 		},
 	},
 	scales: {
 		y: {
+			ticks: {
+				color: "#fff",
+			},
 			title: {
 				display: true,
 				text: "Número de registros",
+				color: "#fff",
 			},
 		},
 		x: {
+			ticks: {
+				color: "#fff",
+			},
 			title: {
 				display: true,
 				text: "Leds encendidos",
+				color: "#fff",
 			},
 		},
 	},
@@ -46,7 +58,7 @@ const PhotocellChart = () => {
 			{
 				label: "Cantidad leds encendidos",
 				data: photoCellValues.map((item) => item.count),
-				backgroundColor: "rgb(138, 255, 99)",
+				backgroundColor: "#8aff63",
 			},
 		],
 	};
